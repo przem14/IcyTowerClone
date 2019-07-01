@@ -15,7 +15,7 @@ TagManager:
   - 
   - Background
   - Shredder
-  - 
+  - Planks
   - 
   - 
   - 
@@ -46,4 +46,7 @@ TagManager:
     locked: 0
   - name: Clouds
     uniqueID: 1056871699
+    locked: 0
+  - name: Foreground
+    uniqueID: 1808561923
     locked: 0
