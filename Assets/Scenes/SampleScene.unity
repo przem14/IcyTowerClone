@@ -541,7 +541,7 @@ MonoBehaviour:
   planksCount: 5
   yOffset: 3
   xBound: 16
-  plank: {fileID: 11400000, guid: e4bd4f51d1cb149dfa5e7c49a81294ab, type: 2}
+  plank: {fileID: 11400000, guid: 98802bfe6021c41a0ac17fcdb9bc23ab, type: 2}
   sortingLayerName: Foreground
   minPlankElements: 2
   maxPlankElements: 8
