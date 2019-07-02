@@ -6,6 +6,9 @@ public class PlanksSpawner : MonoBehaviour
 {
     const int MINIMUM_PLANK_ELEMENTS = 2;
 
+    [Tooltip("GameObject that will be a parent for generated planks.")]
+    [SerializeField] GameObject plankParent;
+
     [Tooltip("How many planks should exists in every frame")]
     [Range(0, 20)]
     [SerializeField] int planksCount = 5;
@@ -53,15 +56,19 @@ public class PlanksSpawner : MonoBehaviour
 
     private bool ShouldSpawn()
     {
+        if (!highestPlank) return true;
+
+        var parent = GetPlankParent();
         var heightDiff = Mathf.Abs(
-            highestPlank.transform.position.y - transform.position.y);
+            highestPlank.transform.position.y - parent.transform.position.y);
         return heightDiff >= yOffset;
     }
 
     private GameObject CreatePlank()
     {
+        var parent = GetPlankParent();
         var plankObject = Instantiate(plank.emptyPlankPrefab);
-        plankObject.transform.SetParent(transform, false);
+        plankObject.transform.SetParent(parent.transform, false);
         BuildPlank(plankObject);
         SetXPosition(plankObject);
         return plankObject;
@@ -120,5 +127,10 @@ public class PlanksSpawner : MonoBehaviour
         spriteRenderer.sortingLayerName = sortingLayerName;
 
         return position + Vector2.right * sprite.bounds.size.x;
+    }
+
+    private GameObject GetPlankParent()
+    {
+        return plankParent ? plankParent : gameObject;
     }
 }
