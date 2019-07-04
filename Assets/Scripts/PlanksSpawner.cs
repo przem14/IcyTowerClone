@@ -51,7 +51,9 @@ public class PlanksSpawner : MonoBehaviour
     {
         if (!ShouldSpawn()) return;
 
-        highestPlank = CreatePlank();
+        var plankObject = CreatePlank();
+        SetYPosition(plankObject);
+        highestPlank = plankObject;
     }
 
     private bool ShouldSpawn()
@@ -67,8 +69,8 @@ public class PlanksSpawner : MonoBehaviour
     private GameObject CreatePlank()
     {
         var parent = GetPlankParent();
-        var plankObject = Instantiate(plank.emptyPlankPrefab);
-        plankObject.transform.SetParent(parent.transform, false);
+        var plankObject
+             = Instantiate(plank.emptyPlankPrefab, parent.transform, false);
         BuildPlank(plankObject);
         SetXPosition(plankObject);
         return plankObject;
@@ -80,6 +82,15 @@ public class PlanksSpawner : MonoBehaviour
         var maxX = Mathf.Max(0f, xBound - plankWidth);
         var xPosition = Random.Range(0f, maxX);
         plankObject.transform.position += Vector3.right * xPosition;
+    }
+
+    private void SetYPosition(GameObject plankObject)
+    {
+        if (!highestPlank) return;
+
+        var y = highestPlank.transform.position.y + yOffset;
+        var position = new Vector3(plankObject.transform.position.x, y, plankObject.transform.position.z);
+        plankObject.transform.position = position;
     }
 
     private float CalculatePlankWidth(GameObject plankObject)
