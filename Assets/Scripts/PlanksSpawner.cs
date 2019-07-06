@@ -73,7 +73,18 @@ public class PlanksSpawner : MonoBehaviour
              = Instantiate(plank.emptyPlankPrefab, parent.transform, false);
         BuildPlank(plankObject);
         SetXPosition(plankObject);
+        SetCollider(plankObject);
         return plankObject;
+    }
+
+    private void SetCollider(GameObject plankObject)
+    {
+        var plankCollider = plankObject.GetComponent<BoxCollider2D>();
+        if (!plankCollider) return;
+        var width = CalculatePlankWidth(plankObject);
+        plankCollider.size = new Vector2(width, plankCollider.size.y);
+        plankCollider.offset = new Vector2(width / 2f, plankCollider.offset.y);
+
     }
 
     private void SetXPosition(GameObject plankObject)
@@ -89,7 +100,10 @@ public class PlanksSpawner : MonoBehaviour
         if (!highestPlank) return;
 
         var y = highestPlank.transform.position.y + yOffset;
-        var position = new Vector3(plankObject.transform.position.x, y, plankObject.transform.position.z);
+        var position = new Vector3(
+            plankObject.transform.position.x,
+            y,
+            plankObject.transform.position.z);
         plankObject.transform.position = position;
     }
 
