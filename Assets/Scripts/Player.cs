@@ -21,18 +21,23 @@ public class Player : MonoBehaviour
     {
         var horizontalFactor = Input.GetAxis("Horizontal");
 
-        rigidbody.velocity = new Vector2(walkVelocity * horizontalFactor, rigidbody.velocity.y);
+        rigidbody.velocity
+            = new Vector2(walkVelocity * horizontalFactor, rigidbody.velocity.y);
 
 
         if (!isJumping && !Mathf.Approximately(0f, Input.GetAxis("Jump")))
         {
             isJumping = true;
+            var gravityFactor = Physics2D.gravity.y * rigidbody.gravityScale;
             rigidbody.velocity = new Vector2(
                 rigidbody.velocity.x,
-                Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y * rigidbody.gravityScale)));
+                Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(gravityFactor)));
         }
+    }
 
-        if (GetComponent<BoxCollider2D>().IsTouchingLayers(LayerMask.GetMask("Planks")))
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (LayerMask.LayerToName(collision.gameObject.layer) == "Planks")
         {
             isJumping = false;
         }

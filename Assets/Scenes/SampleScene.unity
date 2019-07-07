@@ -1705,6 +1705,7 @@ GameObject:
   - component: {fileID: 544636570}
   - component: {fileID: 544636569}
   - component: {fileID: 544636571}
+  - component: {fileID: 544636572}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -1790,7 +1791,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 8
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1809,7 +1810,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.024995804}
+  m_Offset: {x: -0.004187107, y: -0.6066866}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1820,7 +1821,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0831556, y: 1.3828442}
+  m_Size: {x: 0.24948025, y: 0.12706232}
   m_EdgeRadius: 0
 --- !u!114 &544636571
 MonoBehaviour:
@@ -1834,11 +1835,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b49cbaa7f2634a9c94eaca042b6a8d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkVelocity: 0
-  walkAcceleration: 0
-  walkDeceleration: 0
-  airAcceleration: 0
-  jumpHeight: 0
+  walkVelocity: 10
+  jumpHeight: 3.5
+--- !u!70 &544636572
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 544636566}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.013884544, y: -0.05172348}
+  m_Size: {x: 0.6481085, y: 1.0035372}
+  m_Direction: 0
 --- !u!1001 &582759777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5333,6 +5347,50 @@ PrefabInstance:
     - {fileID: 8675018570730209363, guid: ec77e3a0b2849496184bc81358e435d5, type: 3}
     - {fileID: 6812477863904593137, guid: ec77e3a0b2849496184bc81358e435d5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ec77e3a0b2849496184bc81358e435d5, type: 3}
+--- !u!1 &1651765104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1651765106}
+  - component: {fileID: 1651765105}
+  m_Layer: 0
+  m_Name: PlanksCollisionController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1651765105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651765104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b548a1e3e656f4e08b8b2c426bdd9001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planksParent: {fileID: 243116311}
+--- !u!4 &1651765106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1651765104}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1680663959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6165,7 +6223,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fc7239753b2704dacb3575126a52d6ac, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
