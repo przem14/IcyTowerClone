@@ -15,5 +15,5 @@ MonoBehaviour:
   leftSprite: {fileID: 21300000, guid: 7efb0b9e861b54628907a6d9db61469f, type: 3}
   middleSprite: {fileID: 21300000, guid: 7efb0b9e861b54628907a6d9db61469f, type: 3}
   rightSprite: {fileID: 21300000, guid: 7efb0b9e861b54628907a6d9db61469f, type: 3}
-  emptyPlankPrefab: {fileID: 5565776603175216431, guid: ec77e3a0b2849496184bc81358e435d5,
+  emptyPlankPrefab: {fileID: 5565776603175216431, guid: a7a6cec7c3ec24610a8997d9bb46f2bc,
     type: 3}
