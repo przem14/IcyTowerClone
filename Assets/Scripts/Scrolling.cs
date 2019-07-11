@@ -28,4 +28,9 @@ public class Scrolling : MonoBehaviour
             transform.GetChild(i).Translate(translation);
         }
     }
+
+    public void SetScrollingSpeed(float speed)
+    {
+        scrollingSpeed = speed;
+    }
 }
