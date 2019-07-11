@@ -5,43 +5,36 @@ using UnityEngine;
 public class ScrollingObjectsController : MonoBehaviour
 {
     [SerializeField] Scrolling[] scrollableObjects;
-
-    [SerializeField] Player player;
-    [SerializeField] float yBound;
-
     [SerializeField] float defaultSpeed = 1f;
 
-    float lastPlayerPositionY;
-    float currentScrollingSpeed = 0f;
+    float currentSpeed = 0f;
+    float gravity;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        lastPlayerPositionY = player.transform.position.y;
+        DecelerateSpeed();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void DecelerateSpeed()
     {
-        var playerPositionY = player.transform.position.y;
-        var diffY = playerPositionY - lastPlayerPositionY;
+        if (Mathf.Approximately(currentSpeed, 0f) ||
+            Mathf.Approximately(currentSpeed, defaultSpeed)) return;
+        var deceleration = gravity * Time.deltaTime;
+        SetObjectsSpeed(Mathf.Clamp(currentSpeed - deceleration, defaultSpeed, currentSpeed));
+    }
 
-        if (diffY > 0f && playerPositionY > yBound)
+    private void SetObjectsSpeed(float speed)
+    {
+        currentSpeed = speed;
+        foreach (var obj in scrollableObjects)
         {
-            currentScrollingSpeed = diffY / Time.deltaTime;
-            Debug.Log("Bound exceeded - speed: " + currentScrollingSpeed.ToString());
+            obj.SetScrollingSpeed(speed);
         }
-        else
-        {
-            currentScrollingSpeed = defaultSpeed;
-            Debug.Log("Normal speed = " + currentScrollingSpeed.ToString());
-        }
+    }
 
-        foreach (var s in scrollableObjects)
-        {
-            s.SetScrollingSpeed(currentScrollingSpeed);
-        }
-
-        lastPlayerPositionY = playerPositionY;
+    public void OnPlayerLockY(float playerVelocity, float lockTime)
+    {
+        SetObjectsSpeed(defaultSpeed + playerVelocity);
+        gravity = (playerVelocity / lockTime);
     }
 }
