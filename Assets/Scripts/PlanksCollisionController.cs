@@ -18,6 +18,7 @@ public class PlanksCollisionController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!playerCollider) return;
         var colliders
             = planksParent.transform.GetComponentsInChildren<Collider2D>();
         foreach (var plankCollider in colliders)

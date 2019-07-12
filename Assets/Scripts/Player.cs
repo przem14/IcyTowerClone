@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
 
     private bool ShouldJump()
     {
-        return !isJumping && !Mathf.Approximately(0f, Input.GetAxis("Jump"));
+        return !isJumping && Input.GetKeyDown(KeyCode.Space);
     }
 
     private bool ShouldLockPositionY()
