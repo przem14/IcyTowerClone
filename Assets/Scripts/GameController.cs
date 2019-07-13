@@ -22,17 +22,25 @@ public class GameController : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
 
-            startGameCanvas = Instantiate(startGameCanvasPrefab, transform);
-            endScoreCanvas = Instantiate(endScoreCanvasPrefab, transform);
+            //startGameCanvas = Instantiate(startGameCanvasPrefab, transform);
+            //endScoreCanvas = Instantiate(endScoreCanvasPrefab, transform);
+
+            LoadCanvas();
 
             startGameCanvas.enabled = true;
             endScoreCanvas.enabled = false;
-            return;
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    private void LoadCanvas()
+    {
+        var canvasObjects = FindObjectsOfType<Canvas>();
+        startGameCanvas = System.Array.Find(canvasObjects, c => c.name == "StartCanvas");
+        endScoreCanvas = System.Array.Find(canvasObjects, c => c.name == "EndScoreCanvas");
     }
 
     void StartGame()
@@ -47,6 +55,13 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!startGameCanvas)
+        {
+            LoadCanvas();
+            startGameCanvas.enabled = false;
+            endScoreCanvas.enabled = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartGame();
