@@ -1128,7 +1128,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3752398839357053881}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: 7, z: 0}
+  m_LocalPosition: {x: 6, y: 7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3752398840544531037}
@@ -1539,8 +1539,8 @@ MonoBehaviour:
   xBound: 0
   plank: {fileID: 11400000, guid: 0c065ad92a89744d0bdd2eab5cfa2dd8, type: 2}
   sortingLayerName: Foreground
-  minPlankElements: 2
-  maxPlankElements: 2
+  minPlankElements: 4
+  maxPlankElements: 4
 --- !u!4 &3752398839619753558
 Transform:
   m_ObjectHideFlags: 0
@@ -2190,7 +2190,7 @@ MonoBehaviour:
   plankParent: {fileID: 3752398841209442283}
   planksCount: 5
   yOffset: 3
-  xBound: 16
+  xBound: 12
   plank: {fileID: 11400000, guid: 98802bfe6021c41a0ac17fcdb9bc23ab, type: 2}
   sortingLayerName: Foreground
   minPlankElements: 2
@@ -2203,7 +2203,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3752398840168582563}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8, y: 10, z: 0}
+  m_LocalPosition: {x: -6, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3752398839594631943}
@@ -2608,7 +2608,7 @@ MonoBehaviour:
   xBound: 0
   plank: {fileID: 11400000, guid: 0c065ad92a89744d0bdd2eab5cfa2dd8, type: 2}
   sortingLayerName: Foreground
-  minPlankElements: 2
+  minPlankElements: 4
   maxPlankElements: 2
 --- !u!212 &3752398840501864288
 SpriteRenderer:
@@ -3276,7 +3276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3752398841209442283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8, y: 9, z: 0}
+  m_LocalPosition: {x: -6, y: 9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3752398840544531037}
