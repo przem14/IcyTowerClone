@@ -10,8 +10,7 @@ public class ScoreCounter : MonoBehaviour
 
     int score = 0;
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateScore()
     {
         var planksBelowCount = 0;
         var playerY = player.transform. position.y;
@@ -19,10 +18,9 @@ public class ScoreCounter : MonoBehaviour
         for (var i = 0; i < childCount; ++i)
         {
             var plankY = planksParent.transform.GetChild(i).position.y;
-            Debug.Log("plankY=" + plankY + " playerY=" + playerY);
             if (plankY < playerY) planksBelowCount++;
         }
-        score = objectShredder.GetNumberOfRemovedPlanks() + planksBelowCount;
+        score = Mathf.Max(objectShredder.GetNumberOfRemovedPlanks() + planksBelowCount, score);
     }
 
     public int GetScore()

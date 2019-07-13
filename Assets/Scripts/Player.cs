@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     [Header("Jumping related events")]
     [SerializeField] PlayerJumpLocked playerLockedOnY;
-    [SerializeField] UnityEvent playerUnlockedOnY;
+    [SerializeField] UnityEvent landedOnPlank;
 
 
     Rigidbody2D rigidbody;
@@ -110,6 +110,7 @@ public class Player : MonoBehaviour
 
         isJumping = false;
         isLocked = false;
+        landedOnPlank.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
