@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rigidbody;
     bool isJumping = false;
     bool isLocked = false;
+    bool isPlankDetected = false;
 
 
     // Start is called before the first frame update
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
 
     private void HandleJump()
     {
+        if (!isPlankDetected) return;
         isJumping = true;
         var gravityFactor = Physics2D.gravity.y * rigidbody.gravityScale;
         rigidbody.velocity = new Vector2(
@@ -91,7 +93,6 @@ public class Player : MonoBehaviour
     private float LockPlayerPositionY()
     {
         isLocked = true;
-        rigidbody.constraints |= RigidbodyConstraints2D.FreezePositionY;
         var lockTime = Mathf.Abs(
             (rigidbody.velocity.y) / (rigidbody.gravityScale * Physics2D.gravity.y));
         playerLockedOnY.Invoke(rigidbody.velocity.y, lockTime);
@@ -100,10 +101,25 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (LayerMask.LayerToName(collision.gameObject.layer) == "Planks")
+        if (IsOnPlanksLayer(collision.collider))
         {
             isJumping = false;
             isLocked = false;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        isPlankDetected = IsOnPlanksLayer(collision);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isPlankDetected = false;
+    }
+
+    private bool IsOnPlanksLayer(Collider2D collision)
+    {
+        return LayerMask.LayerToName(collision.gameObject.layer) == "Planks";
     }
 }
