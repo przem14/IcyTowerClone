@@ -4616,7 +4616,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkVelocity: 15
-  jumpHeight: 6
+  idleJumpHeight: 4
+  bonusJump: 3
   lowerYBound: 3
   upperYBound: 3
   playerLockedOnY:

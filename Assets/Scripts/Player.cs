@@ -12,7 +12,8 @@ public class Player : MonoBehaviour
     const string PLANKS_LAYER_NAME = "Planks";
 
     [SerializeField] float walkVelocity;
-    [SerializeField] float jumpHeight;
+    [SerializeField] float idleJumpHeight;
+	[SerializeField] float bonusJump;
     [SerializeField] float lowerYBound;
     [SerializeField] float upperYBound;
 
@@ -25,7 +26,6 @@ public class Player : MonoBehaviour
     CapsuleCollider2D plankDetector;
     bool isJumping = false;
     bool isLocked = false;
-    bool isPlankDetected = false;
 
     // Start is called before the first frame update
     void Start()
@@ -71,9 +71,11 @@ public class Player : MonoBehaviour
     private void HandleJump()
     {
         if (!plankDetector.IsTouchingLayers(LayerMask.GetMask(PLANKS_LAYER_NAME))) return;
-       // if (!isPlankDetected) return;
+
         isJumping = true;
+		var bonusFactor = Mathf.Abs(Input.GetAxis("Horizontal"));
         var gravityFactor = Physics2D.gravity.y * rigidbody.gravityScale;
+        var jumpHeight = (idleJumpHeight + bonusFactor * bonusJump);
         rigidbody.velocity = new Vector2(
             rigidbody.velocity.x,
             Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(gravityFactor)));
@@ -111,18 +113,6 @@ public class Player : MonoBehaviour
         isJumping = false;
         isLocked = false;
         landedOnPlank.Invoke();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        isPlankDetected = IsOnPlanksLayer(collision);
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (IsOnPlanksLayer(collision)) return;
-
-        isPlankDetected = false;
     }
 
     private bool IsOnPlanksLayer(Collider2D collision)

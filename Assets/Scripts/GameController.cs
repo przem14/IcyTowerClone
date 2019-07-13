@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
     Canvas endScoreCanvas;
 
     bool isGameStarted = false;
-
+ 
 
     // Start is called before the first frame update
     void Start()
@@ -21,9 +21,6 @@ public class GameController : MonoBehaviour
         if(!(FindObjectsOfType<GameController>().Length > 1))
         {
             DontDestroyOnLoad(gameObject);
-
-            //startGameCanvas = Instantiate(startGameCanvasPrefab, transform);
-            //endScoreCanvas = Instantiate(endScoreCanvasPrefab, transform);
 
             LoadCanvas();
 
