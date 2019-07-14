@@ -22,7 +22,7 @@ public class Scrolling : MonoBehaviour
 
     private void MoveChildren()
     {
-        var translation = direction * scrollingSpeed * Time.deltaTime;
+        var velocity = direction * scrollingSpeed;
 
         for (int i = 0; i < transform.childCount; ++i)
         {
@@ -31,11 +31,11 @@ public class Scrolling : MonoBehaviour
 
             if (rigidbody)
             {
-                rigidbody.velocity = new Vector2(0, -scrollingSpeed);   
+                rigidbody.velocity = velocity;
             }
             else
             {
-                transform.GetChild(i).Translate(translation);
+                transform.GetChild(i).Translate(velocity * Time.deltaTime);
             }
             
         }

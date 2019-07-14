@@ -15,18 +15,10 @@ public class ClockController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void StartClock()
     {
         animator.SetBool("isStarted", true);
     }
-
-
 
     public void OnMinutePassed()
     {
