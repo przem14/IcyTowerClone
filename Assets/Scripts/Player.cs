@@ -66,6 +66,15 @@ public class Player : MonoBehaviour
 
         rigidbody.velocity
             = new Vector2(walkVelocity * horizontalFactor, rigidbody.velocity.y);
+
+        ChangeFaceDirection(horizontalFactor);
+    }
+
+    private void ChangeFaceDirection(float horizontalFactor)
+    {
+        var scale = transform.localScale;
+        scale.x = Mathf.Sign(horizontalFactor);
+        transform.localScale = scale;
     }
 
     private void HandleJump()
