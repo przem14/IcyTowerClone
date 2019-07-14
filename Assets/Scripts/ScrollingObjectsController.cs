@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ScrollingObjectsController : MonoBehaviour
 {
     [SerializeField] Scrolling[] scrollableObjects;
     [SerializeField] float defaultSpeed = 1f;
+    [SerializeField] float acceleration = 1f;
+    [SerializeField] UnityEvent onScrollingStarted; 
 
     float currentSpeed = 0f;
     float gravity;
@@ -25,6 +28,11 @@ public class ScrollingObjectsController : MonoBehaviour
 
     private void SetObjectsSpeed(float speed)
     {
+        if (Mathf.Approximately(currentSpeed, 0f) && speed > 0f)
+        {
+            onScrollingStarted.Invoke();
+        }
+
         currentSpeed = speed;
         foreach (var obj in scrollableObjects)
         {
@@ -36,5 +44,14 @@ public class ScrollingObjectsController : MonoBehaviour
     {
         SetObjectsSpeed(defaultSpeed + playerVelocity);
         gravity = (playerVelocity / lockTime);
+    }
+
+    public void IncreaseSpeed()
+    {
+        defaultSpeed += acceleration;
+        if (defaultSpeed > currentSpeed)
+        {
+            SetObjectsSpeed(defaultSpeed);
+        }
     }
 }

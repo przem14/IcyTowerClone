@@ -15,7 +15,7 @@ public class Scrolling : MonoBehaviour
         if (reverseDirection) direction.y *= -1f;
     }
 
-    void Update()
+    private void Update()
     {
         MoveChildren();
     }
@@ -23,9 +23,21 @@ public class Scrolling : MonoBehaviour
     private void MoveChildren()
     {
         var translation = direction * scrollingSpeed * Time.deltaTime;
+
         for (int i = 0; i < transform.childCount; ++i)
         {
-            transform.GetChild(i).Translate(translation);
+            var child = transform.GetChild(i);
+            var rigidbody = child.GetComponent<Rigidbody2D>();
+
+            if (rigidbody)
+            {
+                rigidbody.velocity = new Vector2(0, -scrollingSpeed);   
+            }
+            else
+            {
+                transform.GetChild(i).Translate(translation);
+            }
+            
         }
     }
 
