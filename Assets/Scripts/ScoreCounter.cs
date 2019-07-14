@@ -8,14 +8,25 @@ using UnityEngine.Events;
 
 public class ScoreCounter : MonoBehaviour
 {
+    const int MINIMUM_BONUS_TO_SHOW_MSG = 10;
+
     [SerializeField] ObjectShredder objectShredder;
     [SerializeField] GameObject planksParent;
     [SerializeField] Player player;
+    [SerializeField] BonusPointsTimer bonusPointsTimer;
     [SerializeField] OnBonusGainedEvent onBonusGained;
 
     int score = 0;
     int bonusScore = 0;
     int currentBonusScore = 0;
+
+    private void Start()
+    {
+        if (bonusPointsTimer)
+        {
+            bonusPointsTimer.onTimeExpired.AddListener(AddBonus);
+        }
+    }
 
     public void UpdateScore()
     {
@@ -38,15 +49,25 @@ public class ScoreCounter : MonoBehaviour
         if (newScore > score + 1)
         {
             currentBonusScore += newScore - score;
+            UpdateBonusTimer();
         }
         else
         {
-            if (currentBonusScore > 0)
-            {
-                onBonusGained.Invoke(GetBonusMessae());
-            }
-            bonusScore += currentBonusScore;
-            currentBonusScore = 0;
+            AddBonus();
+        }
+    }
+
+    private void UpdateBonusTimer()
+    {
+        if (!bonusPointsTimer) return;
+
+        if (bonusPointsTimer.IsActive())
+        {
+            bonusPointsTimer.ProlongTimer();
+        }
+        else
+        {
+            bonusPointsTimer.StartTimer();
         }
     }
 
@@ -62,6 +83,18 @@ public class ScoreCounter : MonoBehaviour
         }
 
         return "Amazing!";
+    }
+
+    private void AddBonus()
+    {
+        if (currentBonusScore > MINIMUM_BONUS_TO_SHOW_MSG)
+        {
+            onBonusGained.Invoke(GetBonusMessae());
+        }
+        bonusScore += currentBonusScore;
+        currentBonusScore = 0;
+
+        bonusPointsTimer.StopTimer();
     }
 
     public int GetScore()
